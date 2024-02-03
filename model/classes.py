@@ -11,7 +11,6 @@ class Texto(BaseModel):
     """Data model for API input"""
 
     texto: str  # A string representing the input text to be analyzed for sentiment
-    score: float  # A float representing the sentiment score associated with the text
 
 class User(BaseModel):
     """Data model for API input with authentication"""

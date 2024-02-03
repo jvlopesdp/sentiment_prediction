@@ -6,18 +6,25 @@ import requests
 BASE_URL = "http://localhost:8000"
 
 # Function to create a user
-def criar_usuario(nome, senha):
-    response = requests.post(f"{BASE_URL}/criar_usuario", json={"nome": nome, "senha": senha})
+def criar_usuario(nome:str, senha:str):
+    response = requests.post(f"{BASE_URL}/criar_usuario", json={"nome":nome,"senha":senha})
     return response.json()
 
-# Function to authenticate a user
-def autenticar_usuario(nome, senha):
-    response = requests.post(f"{BASE_URL}/predicao_autenticada", headers={"nome": nome, "senha": senha}, json={"texto": "Sample Text"})
+# Function to authenticate a user with text for sentiment analysis
+def predicao_autenticada(nome, senha, texto):
+    headers = {"nome":nome,"senha":senha}
+    data = {"texto":texto}
+    response = requests.post(f"{BASE_URL}/predicao_autenticada", headers=headers, json=data)
+    return response.json()
+
+# Function to get user registered
+def obter_usuarios():
+    response = requests.get(f"{BASE_URL}/usuarios")
     return response.json()
 
 # Function to get user texts
 def obter_textos(nome, senha):
-    response = requests.get(f"{BASE_URL}/textos", headers={"nome": nome, "senha": senha})
+    response = requests.get(f"{BASE_URL}/textos", headers={"nome": nome, "senha": senha}.json())
     return response.json()
 
 # Streamlit App
@@ -30,24 +37,29 @@ new_password = st.text_input("Enter password:", type="password")
 if st.button("Create User"):
     if new_username and new_password:
         result = criar_usuario(new_username, new_password)
-        st.success(result.get("mensagem", "User created successfully"))
-    else:
-        st.error("Both username and password are required.")
+        st.write(result)
+        
 
-# Authentication Section
-st.header("Authentication")
-username = st.text_input("Enter username:")
-password = st.text_input("Enter password:", type="password")
-if st.button("Authenticate"):
-    if username and password:
-        result = autenticar_usuario(username, password)
-        if "predicao" in result:
-            st.success(f"Authentication successful. Sentiment Prediction: {result['predicao']} (Score: {result['score']})")
-        else:
-            st.error("Authentication failed.")
-    else:
-        st.error("Both username and password are required.")
+# Authentication Text Section
+st.header("Text Analysis")
+username = st.text_input("Enter username:", key="username")
+password = st.text_input("Enter password:", type="password", key="password")
 
+# Allow the user to enter a text for sentiment analysis
+text_to_analyze = st.text_area("Enter text for sentiment analysis:")
+
+if st.button("Authenticate and Analyze Sentiment"):
+    
+    result = predicao_autenticada(username, password, text_to_analyze)
+    st.write(result)
+    
+# List available users
+st.header("List all users")
+st.write("Get the list of all registered users")
+if st.form("Get All Users"):
+    result = obter_usuarios()
+    st.write(result)
+    
 # Get User Texts Section
 st.header("Get User Texts")
 if st.checkbox("View User Texts"):
