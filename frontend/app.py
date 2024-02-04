@@ -3,7 +3,7 @@ import json
 import requests
 
 # Define the base URL of your FastAPI server
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://backend:8000"
 
 # Function to create a user
 def criar_usuario(nome:str, senha:str):

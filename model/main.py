@@ -95,7 +95,7 @@ def get_textos(nome: str = Header(None), senha: str = Header(None)):
 
     Args:
         nome (str, optional): The username for authentication. Defaults to Header(None).
-        senha (str, optional): The password for authentication. Defaults to Header(None).
+        senha (str, optional): The p    assword for authentication. Defaults to Header(None).
 
     Returns:
         Textos: A list of texts objects containing 'id', 'nome', 'texto' and 'score'.
