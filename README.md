@@ -35,7 +35,10 @@ git clone https://github.com/yourusername/sentiment-analysis-app.git
 2. Navigate to the project directory:
 3. Build and start the Docker containers:
 ```
-just up or if you don't have just installed
+just up
+
+or if you don't have just installed
+
 docker-compose up --build
 ```
 4. Access the web application in your browser at [http://localhost:8501](http://localhost:8501).
