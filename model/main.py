@@ -10,6 +10,8 @@ from sentiment_prediction import sentiment_analysis
 # Create a FastAPI application
 app = FastAPI()
 
+criar_base_de_dados()
+
 @app.get("/")
 def home():
     """Initial route of the API"""
@@ -117,8 +119,3 @@ def get_textos(nome: str = Header(None), senha: str = Header(None)):
         print("Score:", texto[3])
     textos = [Texto(id=texto[0], nome=texto[1], texto=texto[2], score = texto[3]) for texto in textos]
     return textos
-
-if __name__ == "__main__":
-    # Create the database and tables, and run the FastAPI application
-    criar_base_de_dados()
-    uvicorn.run(app, host="localhost", port=8000)

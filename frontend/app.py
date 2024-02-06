@@ -24,7 +24,7 @@ def obter_usuarios():
 
 # Function to get user texts
 def obter_textos(nome, senha):
-    response = requests.get(f"{BASE_URL}/textos", headers={"nome": nome, "senha": senha}.json())
+    response = requests.get(f"{BASE_URL}/textos", headers={"nome": nome, "senha": senha})
     return response.json()
 
 # Streamlit App
@@ -53,21 +53,24 @@ if st.button("Authenticate and Analyze Sentiment"):
     result = predicao_autenticada(username, password, text_to_analyze)
     st.write(result)
     
-# List available users
-st.header("List all users")
-st.write("Get the list of all registered users")
-if st.form("Get All Users"):
-    result = obter_usuarios()
-    st.write(result)
+# List User Names Section
+st.header("List User Names")
+if st.button("List User Names"):
+    user_names = obter_usuarios()
+    user_names = [user['nome'] for user in user_names]
+    st.write(user_names)
     
 # Get User Texts Section
 st.header("Get User Texts")
+user_name_for_texts = st.text_input("Enter username for texts:")
+password_for_texts = st.text_input("Enter password for texts:", type="password")
+
 if st.checkbox("View User Texts"):
-    if username and password:
-        texts = obter_textos(username, password)
+    if user_name_for_texts and password_for_texts:
+        texts = obter_textos(user_name_for_texts, password_for_texts)
         if texts:
             st.table(texts)
         else:
             st.info("No texts available for this user.")
     else:
-        st.error("You need to authenticate first to view texts.")
+        st.error("You need to provide username and password for texts.")

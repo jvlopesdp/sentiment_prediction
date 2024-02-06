@@ -10,6 +10,7 @@ services:
     volumes:
       - ./frontend:/app
     restart: always
+    container_name: frontend
     networks:
       - app
 

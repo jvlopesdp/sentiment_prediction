@@ -29,7 +29,7 @@ To run the application, you can use Docker Compose. Make sure you have Docker in
 
 1. Clone the repository:
 ```
-git clone https://github.com/yourusername/sentiment-analysis-app.git
+git clone https://github.com/jvlopesdp/sentiment_prediction.git
 ```
 
 2. Navigate to the project directory:
