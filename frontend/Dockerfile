@@ -13,12 +13,8 @@ COPY requirements.txt /app/requirements.txt
 # Install Python dependencies listed in the "requirements.txt" file
 RUN pip install -r requirements.txt
 
-# Expose port 8000 to allow external access to the container on port 8000 and 8501 (fastAPI and Streamlit respectively)
+# Expose port 8501 to allow external access to the container on port 8501 (Streamlit - Frontend Container )
 EXPOSE 8501
-
-# Define the default command to run when the container is started
-# This command starts the Uvicorn ASGI server to run your FastAPI application
-# "--host localhost" specifies that the server should listen only on localhost
 
 ENTRYPOINT ["streamlit","run"]
 

@@ -1,4 +1,4 @@
-version: '3'
+version: '1.0'
 services:
   frontend:
     build:
@@ -10,7 +10,8 @@ services:
     volumes:
       - ./frontend:/app
     restart: always
-    container_name: frontend
+    networks:
+      - app
 
   backend:
     build:
@@ -19,11 +20,13 @@ services:
       - 8000:8000
     volumes:
       - ./model:/app
-    restart: always
+    container_name: backend
     networks:
       - app
-    container_name: backend
 
 networks:
   app:
     driver: bridge
+
+
+# To run the application just type docker-compose up --build
