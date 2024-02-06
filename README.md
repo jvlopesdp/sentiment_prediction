@@ -4,6 +4,8 @@
 
 This project is a web application that combines the power of Natural Language Processing (NLP) with FastAPI for the backend, Streamlit for the frontend, and the HuggingFace Transformers library for sentiment analysis. The application allows users to create accounts, authenticate, and analyze the sentiment of text inputs. Docker is used to containerize the application, making it easy to deploy and manage.
 
+[streamlit-app.webm](https://github.com/jvlopesdp/sentiment_prediction/assets/92488476/5ea3cf97-b791-4a97-af50-42083af45e3b)
+
 ## Features
 
 - User account creation and authentication.
@@ -42,6 +44,8 @@ or if you don't have just installed
 docker-compose up --build
 ```
 4. Access the web application in your browser at [http://localhost:8501](http://localhost:8501).
+![docker_compose](https://github.com/jvlopesdp/sentiment_prediction/assets/92488476/a5f587ed-db60-486b-aac5-52ee15471a02)
+![docker_desktop](https://github.com/jvlopesdp/sentiment_prediction/assets/92488476/07d7c2a7-a8e7-48fe-bf28-24fd7822d878)
 
 ## Dependencies
 
